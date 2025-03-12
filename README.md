@@ -11,3 +11,11 @@
 - stripe - Payment Processing
 - nodemailer - Email service
 - bullmq - Background job processing
+
+# Generate JWT Secret
+
+- https://stackoverflow.com/questions/63804747/how-to-generate-and-set-jwt-secret-and-jwt-expiration-time-in-express
+
+# Stripe secret
+
+- https://dashboard.stripe.com/test/apikeys

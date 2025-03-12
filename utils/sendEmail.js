@@ -8,7 +8,7 @@ export async function sendEmail({ to, subject, text, html }) {
     //configuring Gmail SMTP
     const transporter = nodemailer.createTransport({
       host: "email-smtp.ap-south-1.amazonaws.com", //process.env.SMTP_HOST,
-      port: 25, //process.env.SMTPS_PORT,
+      port: process.env.SMTP_PORT,
       secure: false,
       requireTLS: true,
       auth: {
