@@ -8,7 +8,8 @@ const UserSchema = new mongoose.Schema({
     unique: true,
     required: true
   },
-  password: String
+  password: String,
+  profileUrl: String
 });
 
 //creation of user model

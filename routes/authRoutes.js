@@ -4,27 +4,29 @@ import bcrypt from "bcryptjs";
 //generate jwt token for authentication
 import jwt from "jsonwebtoken";
 import User from "../models/user.js";
-
+import { uploadToS3 } from "../utils/uploadToS3.js";
 //create a new express router
 const authRouter = express.Router();
 
 // register user API ("/api/auth/register")
 
-authRouter.post("/register", async (req, res) => {
+authRouter.post("/register", uploadToS3.single("avatar"), async (req, res) => {
   try {
     //extract user details from request body
     const { name, email, password } = req.body;
     //hash password for security
     const hashedPassword = await bcrypt.hash(password, 10);
+    const profileImage = req.files["avatar"][0];
     //create a new user instance
     const user = new User({
       name,
       email,
-      password: hashedPassword
+      password: hashedPassword,
+      profileUrl: profileImage.location
     });
     //save user to database
     await user.save();
-    res.json({ message: "User Registered Successfully" });
+    res.json({ message: "User Registered Successfully", user });
   } catch (err) {
     res
       .status(500)
